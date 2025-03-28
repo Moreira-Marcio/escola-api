@@ -1,5 +1,5 @@
 {
-  "tipe": "module",
+  "type": "module",
   "name": "api-alunos",
   "version": "1.0.0",
   "description": "API  usando Node.js + Express + MySQL",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mysql2": "^3.14.0"
   }
 }
