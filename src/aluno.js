@@ -23,4 +23,53 @@ function ler(res){
     })
 }
 
-export {ler};
+//função para inserir alunos no banco de dados
+
+function inserir(aluno,res){
+    const sql ="INSERT INTO alunos SET ?";
+    conexao.query(sql,aluno,(erro)=>{
+      if(erro){
+        res.status(400).json(erro.code);
+      }else{
+          res.status(201).json({"status": "aluno inserido!"});
+      }
+    });
+}
+
+//função ler um aluno
+function lerUm(id,res){
+       const sql = "SELECT * FROM alunos WHERE id=?";
+       conexao.query(sql,id,(erro,resultados)=>{
+        //checando se há resultado
+        if(resultados === 0){
+          res.status(204).end();
+          return;// forçar interrupção do codigo
+        }  
+        //if para erro
+        if(erro){
+          res.status(400).json(erro.code);
+        }else {
+          res.status(200).json(resultados);
+        }
+       });
+}
+
+//function atualizaUmAluno(aluno,res){
+//  const sql ="UPDATE alunos SET alunos=? WHERE id=? "
+//}
+
+
+function excluirUmAluno(id,res){
+  const sql= "DELETE FROM alunos WHERE id=?";
+  conexao.query(sql,id,(erro,resultados)=>{
+    if(erro){
+      res.status(400).json(erro.code);
+    }else {
+      res.status(200).json({"status":"aluno excluido",id});
+    }
+  });
+}
+
+
+
+export {ler,inserir,lerUm,excluirUmAluno};
