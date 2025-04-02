@@ -1,5 +1,5 @@
 import express from 'express';
-import {ler,inserir,lerUm,excluirUmAluno} from './src/aluno.js';
+import {ler,inserir,lerUm,excluirUmAluno, atualizar} from './src/aluno.js';
 
 
 
@@ -40,7 +40,13 @@ app.post('/alunos',(req,res)=>{
 });
 
 app.patch('/alunos/:id',(req,res) => {
-res.send(`Atualizando dados do aluno`);
+    //capturar o id
+//res.send(`Atualizando dados do aluno`);
+    const id= parseInt(req.params.id);
+
+    //pegando informação do body
+    const aluno = req.body;
+    atualizar(id,aluno,res);
 });
 
 app.delete('/alunos/:id',(req,res) => {

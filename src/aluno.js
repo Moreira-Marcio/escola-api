@@ -70,6 +70,19 @@ function excluirUmAluno(id,res){
   });
 }
 
+//função para atualizar os dados de um aluno
+
+function atualizar(id,aluno,res) {
+  const sql= "UPDATE alunos SET ? WHERE id=?";
+  conexao.query(sql,[aluno,id],(erro,resultados) =>{
+    if(erro){
+      res.status(400).json(erro.code);
+
+    }else{//...retcencias é chamado spread operador (operador de espalhamento de objeto)
+      res.status(200).json({...aluno,id});
+    }
+  });
+}
 
 
-export {ler,inserir,lerUm,excluirUmAluno};
+export {ler,inserir,lerUm,excluirUmAluno,atualizar};
